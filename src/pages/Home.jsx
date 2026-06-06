@@ -1,8 +1,19 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import andrewPhoto from '../assets/andrew.png'
 import nicholasPhoto from '../assets/nicholas.png'
 
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+const WEB3FORMS_PLACEHOLDER = 'replace_with_your_web3forms_access_key'
+
 function Home() {
+  const [formStatus, setFormStatus] = useState({
+    type: 'idle',
+    message: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const handleHeroPointerMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect()
     const x = ((event.clientX - rect.left) / rect.width) * 100
@@ -17,8 +28,66 @@ function Home() {
     event.currentTarget.style.setProperty('--cursor-y', '48%')
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
+    if (
+      !WEB3FORMS_ACCESS_KEY ||
+      WEB3FORMS_ACCESS_KEY === WEB3FORMS_PLACEHOLDER
+    ) {
+      setFormStatus({
+        type: 'error',
+        message:
+          'The contact form is not configured yet. Please try again later.',
+      })
+      return
+    }
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY)
+    formData.append('subject', 'New APNY Freelance website inquiry')
+    formData.append('from_name', 'APNY Freelance Contact Form')
+
+    setIsSubmitting(true)
+    setFormStatus({
+      type: 'loading',
+      message: 'Sending your inquiry...',
+    })
+
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      })
+      const result = await response.json().catch(() => null)
+
+      if (!response.ok || !result?.success) {
+        throw new Error(
+          result?.body?.message ||
+            result?.message ||
+            'Unable to send your inquiry right now.',
+        )
+      }
+
+      form.reset()
+      setFormStatus({
+        type: 'success',
+        message: 'Thanks. Your inquiry was sent successfully.',
+      })
+    } catch (error) {
+      setFormStatus({
+        type: 'error',
+        message:
+          error.message || 'Something went wrong. Please try again in a moment.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -115,6 +184,13 @@ function Home() {
           <h2>Tell us what you need.</h2>
         </div>
         <form className="contact-form" onSubmit={handleSubmit}>
+          <input
+            className="botcheck"
+            name="botcheck"
+            type="checkbox"
+            tabIndex="-1"
+            autoComplete="off"
+          />
           <label>
             <span>Name</span>
             <input name="name" type="text" autoComplete="name" required />
@@ -135,8 +211,20 @@ function Home() {
             <span>Message</span>
             <textarea name="message" rows="6" required></textarea>
           </label>
-          <button className="button primary form-submit" type="submit">
-            Send inquiry
+          {formStatus.message ? (
+            <p
+              className={`form-status ${formStatus.type}`}
+              role={formStatus.type === 'error' ? 'alert' : 'status'}
+            >
+              {formStatus.message}
+            </p>
+          ) : null}
+          <button
+            className="button primary form-submit"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : 'Send inquiry'}
           </button>
         </form>
       </section>

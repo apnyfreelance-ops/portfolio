@@ -90,6 +90,70 @@
   transform: scaleX(1);
 }
 
+.site-footer {
+  border-top: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--bg);
+}
+
+.site-footer-inner {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(240px, 1fr) auto minmax(220px, 0.72fr);
+  gap: 28px;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 34px 40px;
+  box-sizing: border-box;
+}
+
+.footer-brand,
+.footer-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.footer-brand p,
+.footer-meta p {
+  max-width: 34ch;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 145%;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+}
+
+.footer-nav a {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+.footer-meta {
+  justify-items: end;
+  text-align: right;
+}
+
+.footer-meta .profile-link {
+  margin-top: 0;
+}
+
 .hero-section {
   --cursor-x: 50%;
   --cursor-y: 48%;
@@ -793,13 +857,44 @@
 }
 
 .message-field,
+.form-status,
 .form-submit {
   grid-column: 1 / -1;
+}
+
+.botcheck {
+  display: none;
+}
+
+.form-status {
+  margin: 0;
+  padding: 13px 15px;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: var(--accent-bg);
+  color: var(--text-h);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 140%;
+}
+
+.form-status.error {
+  border-color: rgba(255, 125, 102, 0.42);
+  background: rgba(255, 125, 102, 0.12);
+}
+
+.form-status.loading {
+  color: var(--accent-soft);
 }
 
 .form-submit {
   justify-self: start;
   min-width: 150px;
+}
+
+.form-submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 @keyframes float-slow {
@@ -841,6 +936,20 @@
 
   .site-nav a {
     flex: 0 0 auto;
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    padding: 30px 20px;
+  }
+
+  .footer-nav {
+    justify-content: flex-start;
+  }
+
+  .footer-meta {
+    justify-items: start;
+    text-align: left;
   }
 
   .hero-section {
