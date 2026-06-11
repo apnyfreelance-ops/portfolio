@@ -6,33 +6,16 @@ export const demoCards = [
     screenshot: 'src\\assets\\barber-demo.png',
   },
   {
-    title: 'Demo title',
-    description: 'Short description of the demo and the kind of business it serves.',
-    href: '#',
-    screenshot: '',
+    title: 'Neighborhood Deli Demo',
+    description: 'A demo for a neighborhood deli business, showcasing menu items, location, hours, and contact information.',
+    href: 'https://deli-ecru.vercel.app/',
+    screenshot: 'src\\assets\\deli-demo.png',
   },
   {
-    title: 'Demo title',
-    description: 'Short description of the demo and the kind of business it serves.',
-    href: '#',
-    screenshot: '',
+    title: 'Auto Detailing Demo',
+    description: 'A demo for an auto detailing business, showcasing services, pricing, and customer testimonials.',
+    href: 'https://northshoreautodetail.vercel.app/',
+    screenshot: 'src\\assets\\auto-detailing-demo.png',
   },
-  {
-    title: 'Demo title',
-    description: 'Short description of the demo and the kind of business it serves.',
-    href: '#',
-    screenshot: '',
-  },
-  {
-    title: 'Demo title',
-    description: 'Short description of the demo and the kind of business it serves.',
-    href: '#',
-    screenshot: '',
-  },
-  {
-    title: 'Demo title',
-    description: 'Short description of the demo and the kind of business it serves.',
-    href: '#',
-    screenshot: '',
-  },
+  
 ]

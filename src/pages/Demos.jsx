@@ -6,7 +6,7 @@ function Demos() {
     <main>
       <section className="section demos-section">
         <div className="section-heading">
-          <p className="eyebrow">Website demos</p>
+          <p className="eyebrow">Landing page demos</p>
           <h1>Demo websites.</h1>
         </div>
         <div className="demo-grid">
