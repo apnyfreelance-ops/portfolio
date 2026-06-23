@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import apnyBadge from '../assets/apny-badge.png'
 
 function SiteLayout() {
   const { hash, pathname } = useLocation()
@@ -25,7 +26,7 @@ function SiteLayout() {
     <div className="site-shell">
       <header className="site-header">
         <NavLink className="brand" to="/" aria-label="APNY Freelance home">
-          <span className="brand-mark">AP</span>
+          <img className="brand-mark" src={apnyBadge} alt="" aria-hidden="true" />
           <span>APNY Freelance</span>
         </NavLink>
         <nav className="site-nav" aria-label="Main navigation">
@@ -42,7 +43,7 @@ function SiteLayout() {
         <div className="site-footer-inner">
           <div className="footer-brand">
             <Link className="brand" to="/" aria-label="APNY Freelance home">
-              <span className="brand-mark">AP</span>
+              <img className="brand-mark" src={apnyBadge} alt="" aria-hidden="true" />
               <span>APNY Freelance</span>
             </Link>
             <p>Websites for businesses ready to look sharper online.</p>

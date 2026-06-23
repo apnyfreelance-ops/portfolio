@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import andrewPhoto from '../assets/andrew.png'
+import apnyBadge from '../assets/apny-badge.png'
+import apnyBadgeLower from '../assets/apny-badge-layer-1.png'
+import apnyBadgeBorder from '../assets/apny-badge-layer-2.png'
+import apnyBadgeUpper from '../assets/apny-badge-layer-3.png'
 import nicholasPhoto from '../assets/nicholas.png'
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
@@ -105,18 +109,53 @@ function Home() {
           <span className="ambient-line line-two"></span>
         </div>
         <div className="hero-content">
-          <p className="eyebrow">Web design and development</p>
-          <h1>APNY Freelance</h1>
-          <p className="hero-lede">
-            Premium websites for businesses ready to look sharper online.
-          </p>
-          <div className="hero-actions" aria-label="Primary actions">
-            <a className="button primary" href="#contact">
-              Start a project
-            </a>
-            <a className="button secondary" href="#about">
-              Meet the team
-            </a>
+          <div className="hero-badge" aria-hidden="true">
+            <img
+              className="hero-badge-piece badge-layer-border"
+              src={apnyBadgeBorder}
+              alt=""
+            />
+            <img
+              className="hero-badge-piece badge-layer-upper"
+              src={apnyBadgeUpper}
+              alt=""
+            />
+            <img
+              className="hero-badge-piece badge-layer-lower"
+              src={apnyBadgeLower}
+              alt=""
+            />
+            <img className="hero-badge-final" src={apnyBadge} alt="" />
+            <img
+              className="hero-badge-sheen-layer"
+              src={apnyBadgeBorder}
+              alt=""
+            />
+            <img
+              className="hero-badge-sheen-layer"
+              src={apnyBadgeUpper}
+              alt=""
+            />
+            <img
+              className="hero-badge-sheen-layer"
+              src={apnyBadgeLower}
+              alt=""
+            />
+          </div>
+          <div className="hero-copy hero-copy-bottom">
+            <p className="eyebrow">Web design and development</p>
+            <h1 className="hero-title">APNY Freelance</h1>
+            <p className="hero-lede">
+              Premium websites for businesses ready to look sharper online.
+            </p>
+            <div className="hero-actions" aria-label="Primary actions">
+              <a className="button primary" href="#contact">
+                Start a project
+              </a>
+              <a className="button secondary" href="#about">
+                Meet the team
+              </a>
+            </div>
           </div>
         </div>
       </section>
